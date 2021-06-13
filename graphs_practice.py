@@ -29,3 +29,31 @@ lines = ["Dawnstar, Falkreath", "Dawnstar, Markarth", "Markarth, Morthal",
 print("Edge list:", create_edge_list(lines))
 
 
+# MODULE 2 - Adjacency List
+def create_adjacency_list(locations):
+  '''Returns a dictionary adjacency list of edges'''
+  adjacency_list = {}
+  for location in locations:
+    cleaned_location = location.replace('\n', '')
+    location_pair = cleaned_location.split(', ')
+    start = location_pair[0]
+    end = location_pair[1]
+    if start in adjacency_list:
+      adjacency_list[start].append(end)
+    else:
+      adjacency_list[start] = [end]
+  return adjacency_list
+
+adjacency_list = create_adjacency_list(lines)
+
+def is_there_a_path(adjacency_list, location_start, location_end):
+  '''Uses a traversal algorithm to check if a path exists from 
+  location start to location end, returns True if a path exists, 
+  False if not'''
+  if location_end in adjacency_list[location_start]:
+    return True
+  return False
+
+print("Adjacency list:", adjacency_list)
+# print(is_there_a_path(adjacency_list, "Dawnstar", "Markarth"))
+
